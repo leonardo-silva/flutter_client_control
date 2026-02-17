@@ -35,18 +35,11 @@ O projeto do curso consiste em um gerenciamento de clientes de maneira que podem
 
  
 
+## 📚 Q&A
 
-## 🛠️ Abrir e rodar o projeto
+1. __Quando alteramos o estado de uma página, ou seja, uma variável ou widget, precisamos alertar ao Flutter que esta alteração foi feita de maneira que possa ser exibida para o usuário. Pensando nisso, quando chamamos o setState, o que acontece?__
 
-**Para executar este projeto você precisa:**
-
-- Ter uma IDE, que pode ser o  [Android Studio](https://developer.android.com/) instalado na sua máquina
-- Ter a [SDK do Flutter](https://docs.flutter.dev/get-started/install) na versão 3.0.0
+- Através da chamada do setState, o Flutter irá renderizar novamente a tela em questão que chamou o setState, de maneira que todas as alterações necessárias sejam exibidas visualmente com o estado mais atualizado. O Flutter entende que é necessário renderizar toda a tela (no caso, o widget stateful pai) que está sendo exibido quando o setState é invocado. Assim, a tela expressará o estado mais recente e demonstra visualmente isso.
 
 
-## 📚 Mais informações do curso
-
-Gostou do projeto e quer conhecer mais? Você pode [acessar o curso]() que desenvolve o projeto desde o começo!
-
-Esse curso faz parte da [formação de Flutter da Alura](https://cursos.alura.com.br/formacao-flutter)
 
