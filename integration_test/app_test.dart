@@ -1,14 +1,18 @@
+import 'package:client_control/models/client_types.dart';
+import 'package:client_control/models/clients.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:client_control/main.dart' as app;
+import 'package:provider/provider.dart';
 
 void main() {
   // To make sure the app is running when the test begins
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('Integration Test', (tester) async {
-    app.main();
+    final providerKey = GlobalKey();
+    app.main([], providerKey);
     await tester.pumpAndSettle();
     // Testing Home screen
     expect(find.text('Clientes'), findsOneWidget);
@@ -59,6 +63,20 @@ void main() {
     expect(find.text('Ferro'), findsOneWidget);
     expect(find.byIcon(Icons.card_giftcard), findsOneWidget);
 
+    // Testing provide state after changes
+    expect(
+        Provider.of<ClientTypes>(providerKey.currentContext!, listen: false)
+            .types
+            .last
+            .name,
+        'Ferro');
+    expect(
+        Provider.of<ClientTypes>(providerKey.currentContext!, listen: false)
+            .types
+            .last
+            .icon,
+        Icons.card_giftcard);
+
     // Testing a new client with the new type
     await tester.tap(find.byIcon(Icons.menu));
     await tester.pumpAndSettle();
@@ -78,5 +96,33 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Leonardo (Ferro)'), findsOneWidget);
     expect(find.byIcon(Icons.card_giftcard), findsOneWidget);
+
+    // Testing provide state after changes
+    expect(
+        Provider.of<Clients>(providerKey.currentContext!, listen: false)
+            .clients
+            .last
+            .name,
+        'Leonardo');
+    expect(
+        Provider.of<Clients>(providerKey.currentContext!, listen: false)
+            .clients
+            .last
+            .email,
+        'leo@teste.com');
+    expect(
+        Provider.of<Clients>(providerKey.currentContext!, listen: false)
+            .clients
+            .last
+            .type
+            .name,
+        'Ferro');
+    expect(
+        Provider.of<Clients>(providerKey.currentContext!, listen: false)
+            .clients
+            .last
+            .type
+            .icon,
+        Icons.card_giftcard);
   });
 }
