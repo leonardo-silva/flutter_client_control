@@ -59,8 +59,24 @@ void main() {
     expect(find.text('Ferro'), findsOneWidget);
     expect(find.byIcon(Icons.card_giftcard), findsOneWidget);
 
-    // await tester.tap(find.text('Sair'));
-    // await tester.pumpAndSettle();
-    // expect(find.text('Clientes'), findsOneWidget);
+    // Testing a new client with the new type
+    await tester.tap(find.byIcon(Icons.menu));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Gerenciar clientes'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(FloatingActionButton));
+    await tester.pumpAndSettle();
+    expect(find.text('Cadastrar cliente'), findsOneWidget);
+    expect(find.byType(AlertDialog), findsOneWidget);
+    await tester.enterText(find.byType(TextFormField).first, 'Leonardo');
+    await tester.enterText(find.byType(TextFormField).last, 'leo@teste.com');
+    await tester.tap(find.byIcon(Icons.arrow_downward));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Ferro'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Salvar'));
+    await tester.pumpAndSettle();
+    expect(find.text('Leonardo (Ferro)'), findsOneWidget);
+    expect(find.byIcon(Icons.card_giftcard), findsOneWidget);
   });
 }
