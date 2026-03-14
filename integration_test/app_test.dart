@@ -25,7 +25,7 @@ void main() {
     expect(find.text('Sair'), findsOneWidget);
 
     // Testing Navigation
-    // await tester.tap(find.text('Gerenciar Clientes'));
+    // await tester.tap(find.text('Gerenciar clientes'));
     // await tester.pumpAndSettle();
     // expect(find.text('Clientes'), findsOneWidget);
 
@@ -38,6 +38,26 @@ void main() {
     expect(find.text('Golden'), findsOneWidget);
     expect(find.text('Titanium'), findsOneWidget);
     expect(find.text('Diamond'), findsOneWidget);
+
+    // Test the creation of a new client type
+    await tester.tap(find.byType(FloatingActionButton));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Cadastrar tipo'), findsOneWidget);
+    expect(find.byType(AlertDialog), findsOneWidget);
+    await tester.enterText(find.byType(TextFormField), 'Ferro');
+    //await tester.pumpAndSettle();
+    //expect(find.byType(ElevatedButton), findsOneWidget);
+    await tester.tap(find.text('Selecionar icone'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byIcon(Icons.card_giftcard));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Salvar'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Ferro'), findsOneWidget);
+    expect(find.byIcon(Icons.card_giftcard), findsOneWidget);
 
     // await tester.tap(find.text('Sair'));
     // await tester.pumpAndSettle();
