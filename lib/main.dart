@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'pages/clients_page.dart';
 
-void main(List<String> list, Key providerKey) {
+void main({List<String> list = const [], Key providerKey = const Key('')}) {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => Clients(clients: [])),
@@ -20,12 +20,6 @@ void main(List<String> list, Key providerKey) {
     ],
     child: MyApp(key: providerKey),
   ));
-
-  //   ChangeNotifierProvider(
-  //   create: (context) => Clients(clients: []),
-  //   child: const MyApp(),
-  // ));
-  //runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
